@@ -2,13 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import mysql.connector
 app = Flask(__name__)
 
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="nn101586501",
-    database="website"
-)
-
+mydb = mysql.connector.connect(host=os.environ.get('CLEARDB_DATABASE_HOST'),user=os.environ.get('CLEARDB_DATABASE_USER'),password=os.environ.get('CLEARDB_DATABASE_PASSWORD'),db=os.environ.get('CLEARDB_DATABASE_DB'),charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
